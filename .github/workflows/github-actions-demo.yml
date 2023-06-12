@@ -1,0 +1,10 @@
+name: GitHub Actions Demo
+run-name: ${{ github.actor }} is testing out web GitHub Actions 🚀
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: subosito/flutter-action@v1
+      - uses: bluefireteam/flutter-gh-pages@v7
