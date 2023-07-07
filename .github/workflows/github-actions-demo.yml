@@ -1,5 +1,5 @@
-name: GitHub Actions Demo
-run-name: ${{ github.actor }} is testing out web GitHub Actions 🚀
+name: Flutter web build
+run-name: Flutter is building web app 🚀
 on: [push]
 jobs:
   build:

@@ -1,5 +1,5 @@
 # Flutter practice
-> My attempt to bring to flutter & improve [_this_](https://spotycharts.streamlit.app/) previous project.
+> My attempt to bring to flutter & improve [_this_](https://spotycharts.streamlit.app/) previous project. \
 > Live demo [_here_](https://adcerro.github.io/#/).
 
 ## Table of Contents
