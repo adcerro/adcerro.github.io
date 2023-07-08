@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'tools.dart';
 
@@ -45,47 +43,87 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  @override
-  Widget build(BuildContext context) {
-    Tools tool = Tools(Theme.of(context), 'SourceSans');
-    tool.setTBpadding(20);
-    return Scaffold(
-      bottomNavigationBar: tool.bottomBar(buttons: <BottomNavigationBarItem>[
-        tool.bottonButtonBuilder(Icons.home_filled, 'Home'),
-        tool.bottonButtonBuilder(Icons.search, 'Compare'),
-        tool.bottonButtonBuilder(Icons.mail, 'About us')
-      ], currentIndex: _selectedIndex, function: _onItemTapped),
-      body: Container(
-        padding: const EdgeInsets.all(20),
-        alignment: Alignment.center,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            tool.textWriter(
-                text: 'Hi, this is Spoticharts 👋',
-                size: 25,
-                weight: FontWeight.bold),
-            tool.textWriter(
-                text:
-                    "Let's give a try to our page, we have many options to explore",
-                size: 35,
-                weight: FontWeight.bold),
-            Divider(color: Theme.of(context).primaryColor),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                tool.paragraphWithTitle(
-                    titleSize: 25,
-                    title: 'What Spoticharts does',
-                    textSize: 20,
-                    text:
-                        'Spoticharts is a website that is customized according to your musical tastes, allows you to discover related music and offers you the possibility to compare the popularity of songs and playlists over time, giving you a more complete and enriching music experience.'),
-                const Icon(Icons.piano)
-              ],
-            )
-          ],
-        ),
+  Widget horizontalLayout(Tools tool) {
+    return Container(
+      padding: const EdgeInsets.all(20),
+      alignment: Alignment.center,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          tool.textWriter(
+              text: 'Hi, this is Spoticharts 👋',
+              size: 25,
+              weight: FontWeight.bold),
+          tool.textWriter(
+              text:
+                  "Let's give a try to our page, we have many options to explore",
+              size: 35,
+              weight: FontWeight.bold),
+          Divider(color: Theme.of(context).primaryColor),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              tool.welcomeParagraph(
+                  titleSize: 25,
+                  title: 'What Spoticharts does',
+                  textSize: 20,
+                  text:
+                      'Spoticharts is a website that is customized according to your musical tastes, allows you to discover related music and offers you the possibility to compare the popularity of songs and playlists over time, giving you a more complete and enriching music experience.'),
+              tool.lottieLoader(
+                  height: 200,
+                  width: 200,
+                  link:
+                      "https://assets2.lottiefiles.com/private_files/lf30_fjln45y5.json")
+            ],
+          )
+        ],
       ),
     );
+  }
+
+  Widget verticalLayout(Tools tool) {
+    return ListView(
+      padding: const EdgeInsets.all(20),
+      children: [
+        tool.textWriter(
+            text: 'Hi, this is Spoticharts 👋',
+            size: 25,
+            weight: FontWeight.bold),
+        tool.textWriter(
+            text:
+                "Let's give a try to our page, we have many options to explore",
+            size: 35,
+            weight: FontWeight.bold),
+        Divider(color: Theme.of(context).primaryColor),
+        tool.welcomeParagraph(
+            titleSize: 25,
+            title: 'What Spoticharts does',
+            textSize: 20,
+            text:
+                'Spoticharts is a website that is customized according to your musical tastes, allows you to discover related music and offers you the possibility to compare the popularity of songs and playlists over time, giving you a more complete and enriching music experience.'),
+        tool.lottieLoader(
+            height: 150,
+            width: 150,
+            link:
+                "https://assets2.lottiefiles.com/private_files/lf30_fjln45y5.json")
+      ],
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    Tools tool = Tools(context, 'SourceSans');
+    tool.setTBpadding(20);
+    return Scaffold(
+        bottomNavigationBar: tool.bottomBar(buttons: <BottomNavigationBarItem>[
+          tool.bottonButtonBuilder(Icons.home_filled, 'Home'),
+          tool.bottonButtonBuilder(Icons.search, 'Compare'),
+          tool.bottonButtonBuilder(Icons.mail, 'About us')
+        ], currentIndex: _selectedIndex, function: _onItemTapped),
+        body: OrientationBuilder(builder: (context, orientation) {
+          return orientation == Orientation.portrait
+              ? verticalLayout(tool)
+              : horizontalLayout(tool);
+        }));
   }
 }

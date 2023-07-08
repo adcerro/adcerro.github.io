@@ -1,13 +1,14 @@
-import 'dart:ui';
-
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Tools {
-  late ThemeData theme;
   String font = 'SourceSans';
-  double pad = 0;
+  EdgeInsets pad = const EdgeInsets.fromLTRB(0, 0, 0, 0);
   String text = '';
-  Tools(this.theme, this.font);
+  late BuildContext context;
+  Tools(this.context, this.font);
   IconButton buttonBuilder(IconData icon, action) {
     return IconButton(onPressed: action, icon: Icon(icon));
   }
@@ -17,7 +18,7 @@ class Tools {
   }
 
   void setTBpadding(double num) {
-    pad = num;
+    pad = EdgeInsets.fromLTRB(0, num, 0, num);
   }
 
   BottomNavigationBar bottomBar(
@@ -25,10 +26,10 @@ class Tools {
       int currentIndex = 0,
       required Function(int) function}) {
     return BottomNavigationBar(
-      backgroundColor: theme.cardColor,
+      backgroundColor: Theme.of(context).cardColor,
       items: buttons,
-      selectedItemColor: theme.indicatorColor,
-      unselectedItemColor: theme.primaryColor,
+      selectedItemColor: Theme.of(context).indicatorColor,
+      unselectedItemColor: Theme.of(context).primaryColor,
       currentIndex: currentIndex,
       onTap: function,
     );
@@ -39,16 +40,21 @@ class Tools {
     TextStyle st = TextStyle(
         fontSize: size,
         fontWeight: weight,
-        color: theme.primaryColor,
+        color: Theme.of(context).primaryColor,
         fontFamily: font);
     Text tx = Text(text, style: st);
     return Container(
-      padding: EdgeInsets.fromLTRB(0, pad, 0, pad),
+      padding: pad,
       child: tx,
     );
   }
 
-  Container paragraphWithTitle(
+  LottieBuilder lottieLoader(
+      {required String link, double width = 50, double height = 50}) {
+    return Lottie.network(width: width, height: height, animate: true, link);
+  }
+
+  Container welcomeParagraph(
       {String title = '',
       double titleSize = 0,
       String text = '',
@@ -56,23 +62,42 @@ class Tools {
     TextStyle titleStile = TextStyle(
         fontSize: titleSize,
         fontWeight: FontWeight.bold,
-        color: theme.primaryColor,
+        color: Theme.of(context).primaryColor,
         fontFamily: font);
     TextStyle textStile =
         titleStile.copyWith(fontWeight: FontWeight.normal, fontSize: textSize);
 
     return Container(
+        constraints: BoxConstraints(
+            minWidth: MediaQuery.of(context).size.width / 5,
+            maxWidth: MediaQuery.of(context).size.width / 2),
+        padding: pad,
         child: RichText(
-      overflow: TextOverflow.ellipsis,
-      maxLines: 11,
-      text: TextSpan(
-        text: '$title\n',
-        style: titleStile,
-        children: <TextSpan>[
-          TextSpan(text: text, style: textStile),
-        ],
-      ),
-    ));
-    ;
+          overflow: TextOverflow.visible,
+          maxLines: 11,
+          text: TextSpan(
+            text: '$title\n',
+            style: titleStile,
+            children: <TextSpan>[
+              TextSpan(text: '$text\n', style: textStile),
+              TextSpan(
+                text: 'Our DataFrame >',
+                style: textStile.copyWith(
+                    color: Colors.blue, decoration: TextDecoration.underline),
+                recognizer: TapGestureRecognizer()..onTap = _launchDBURL,
+              )
+            ],
+          ),
+        ));
+  }
+
+  _launchDBURL() async {
+    Uri url =
+        Uri.parse('https://www.kaggle.com/datasets/dhruvildave/spotify-charts');
+    if (await launchUrl(url)) {
+      await launchUrl(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 }
