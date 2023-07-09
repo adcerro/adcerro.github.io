@@ -70,7 +70,8 @@ class Tools {
     return Container(
         constraints: BoxConstraints(
             minWidth: MediaQuery.of(context).size.width / 5,
-            maxWidth: MediaQuery.of(context).size.width / 2),
+            maxWidth: MediaQuery.of(context).size.width / 1.45,
+            minHeight: MediaQuery.of(context).size.height / 3),
         padding: pad,
         child: RichText(
           overflow: TextOverflow.visible,

@@ -1,9 +1,13 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'tools.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]).then((value) => runApp(MyApp()));
   runApp(const MyApp());
 }
 
@@ -46,81 +50,41 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget horizontalLayout(Tools tool) {
-    return CustomScrollView(
-      slivers: [
-        SliverList.builder(
-          itemCount: 3,
-          itemBuilder: (context, index) {
-            return Container(
-                padding: const EdgeInsets.all(20),
-                alignment: Alignment.center,
-                child: horizontalList(tool: tool, index: index));
-          },
-        ),
-        SliverGrid.builder(
-          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-            maxCrossAxisExtent: 200.0,
-            mainAxisSpacing: 10.0,
-            crossAxisSpacing: 10.0,
-            childAspectRatio: 4.0,
-          ),
-          itemBuilder: (BuildContext context, int index) {
-            return Container(
-              alignment: Alignment.center,
-              child: horizontalGrid(tool: tool, index: index),
-            );
-          },
-        )
-      ],
-    );
-  }
-
-  Widget horizontalList({required Tools tool, int index = 0}) {
-    switch (index) {
-      case 0:
-        {
-          return tool.textWriter(
+    return Container(
+      padding: const EdgeInsets.all(20),
+      alignment: Alignment.center,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          tool.textWriter(
               text: 'Hi, this is Spoticharts 👋',
               size: 25,
-              weight: FontWeight.bold);
-        }
-      case 1:
-        {
-          return tool.textWriter(
+              weight: FontWeight.bold),
+          tool.textWriter(
               text:
                   "Let's give a try to our page, we have many options to explore",
               size: 35,
-              weight: FontWeight.bold);
-        }
-      case 2:
-        {
-          return Divider(color: Theme.of(context).primaryColor);
-        }
-    }
-    throw 'list error';
-  }
-
-  Widget horizontalGrid({required Tools tool, int index = 0}) {
-    switch (index) {
-      case 0:
-        {
-          return tool.welcomeParagraph(
-              titleSize: 25,
-              title: 'What Spoticharts does',
-              textSize: 20,
-              text:
-                  'Spoticharts is a website that is customized according to your musical tastes, allows you to discover related music and offers you the possibility to compare the popularity of songs and playlists over time, giving you a more complete and enriching music experience.');
-        }
-      case 1:
-        {
-          return tool.lottieLoader(
-              height: 200,
-              width: 200,
-              link:
-                  "https://assets2.lottiefiles.com/private_files/lf30_fjln45y5.json");
-        }
-    }
-    throw 'grid error';
+              weight: FontWeight.bold),
+          Divider(color: Theme.of(context).primaryColor),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              tool.welcomeParagraph(
+                  titleSize: 25,
+                  title: 'What Spoticharts does',
+                  textSize: 20,
+                  text:
+                      'Spoticharts is a website that is customized according to your musical tastes, allows you to discover related music and offers you the possibility to compare the popularity of songs and playlists over time, giving you a more complete and enriching music experience.'),
+              tool.lottieLoader(
+                  height: 200,
+                  width: 200,
+                  link:
+                      "https://assets2.lottiefiles.com/private_files/lf30_fjln45y5.json")
+            ],
+          )
+        ],
+      ),
+    );
   }
 
   Widget verticalLayout(Tools tool) {
