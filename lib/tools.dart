@@ -49,9 +49,8 @@ class Tools {
     );
   }
 
-  LottieBuilder lottieLoader(
-      {required String link, double width = 50, double height = 50}) {
-    return Lottie.network(width: width, height: height, animate: true, link);
+  LottieBuilder lottieLoader({required String link}) {
+    return Lottie.network(animate: true, link);
   }
 
   Container welcomeParagraph(
