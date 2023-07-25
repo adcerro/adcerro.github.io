@@ -53,6 +53,11 @@ class Tools {
     return Lottie.network(animate: true, link);
   }
 
+  LottieBuilder lottieCustomLoader(
+      {required String link, double width = 0, double height = 0}) {
+    return Lottie.network(animate: true, width: width, height: height, link);
+  }
+
   Container welcomeParagraph(
       {String title = '',
       double titleSize = 0,
@@ -91,13 +96,12 @@ class Tools {
         ));
   }
 
-  _launchDBURL() async {
-    Uri url =
+  Future<void> _launchDBURL() async {
+    Uri _url =
         Uri.parse('https://www.kaggle.com/datasets/dhruvildave/spotify-charts');
-    if (await launchUrl(url)) {
-      await launchUrl(url);
-    } else {
-      throw 'Could not launch $url';
+
+    if (!await launchUrl(_url)) {
+      throw Exception('Could not launch $_url');
     }
   }
 }
