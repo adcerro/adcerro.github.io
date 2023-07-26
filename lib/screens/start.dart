@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'tools.dart';
+import 'package:spoticharts/tools.dart';
 
 class Start {
   late BuildContext context;
