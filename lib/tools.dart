@@ -49,9 +49,13 @@ class Tools {
     );
   }
 
-  LottieBuilder lottieLoader(
-      {required String link, double width = 50, double height = 50}) {
-    return Lottie.network(width: width, height: height, animate: true, link);
+  LottieBuilder lottieLoader({required String link}) {
+    return Lottie.network(animate: true, link);
+  }
+
+  LottieBuilder lottieCustomLoader(
+      {required String link, double width = 0, double height = 0}) {
+    return Lottie.network(animate: true, width: width, height: height, link);
   }
 
   Container welcomeParagraph(
@@ -70,7 +74,8 @@ class Tools {
     return Container(
         constraints: BoxConstraints(
             minWidth: MediaQuery.of(context).size.width / 5,
-            maxWidth: MediaQuery.of(context).size.width / 2),
+            maxWidth: MediaQuery.of(context).size.width / 1.45,
+            minHeight: MediaQuery.of(context).size.height / 3),
         padding: pad,
         child: RichText(
           overflow: TextOverflow.visible,
@@ -91,13 +96,12 @@ class Tools {
         ));
   }
 
-  _launchDBURL() async {
-    Uri url =
+  Future<void> _launchDBURL() async {
+    Uri _url =
         Uri.parse('https://www.kaggle.com/datasets/dhruvildave/spotify-charts');
-    if (await launchUrl(url)) {
-      await launchUrl(url);
-    } else {
-      throw 'Could not launch $url';
+
+    if (!await launchUrl(_url)) {
+      throw Exception('Could not launch $_url');
     }
   }
 }
