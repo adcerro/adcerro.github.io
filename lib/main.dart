@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:spoticharts/screens/about.dart';
 import 'tools.dart';
-import 'start.dart';
+import 'package:spoticharts/screens/start.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -54,6 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     Tools tool = Tools(context, 'SourceSans');
     Start st = Start(context);
+    About ab = About(context);
     tool.setTBpadding(20);
     return Scaffold(
         bottomNavigationBar: tool.bottomBar(buttons: <BottomNavigationBarItem>[
@@ -64,9 +66,19 @@ class _MyHomePageState extends State<MyHomePage> {
         body: LayoutBuilder(
           builder: (context, constraints) {
             if (MediaQuery.of(context).size.width <= 700) {
-              return st.verticalLayout(tool);
+              switch (_selectedIndex) {
+                case 2:
+                  return ab.verticalLayout(tool);
+                default:
+                  return st.verticalLayout(tool);
+              }
             } else {
-              return st.horizontalLayout(tool);
+              switch (_selectedIndex) {
+                case 2:
+                  return ab.horizontalLayout(tool);
+                default:
+                  return st.horizontalLayout(tool);
+              }
             }
           },
         ));

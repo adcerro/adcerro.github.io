@@ -36,13 +36,20 @@ class Tools {
   }
 
   Container textWriter(
-      {String text = '', double size = 0, FontWeight? weight}) {
+      {String text = '',
+      double size = 0,
+      FontWeight? weight = FontWeight.normal,
+      TextAlign align = TextAlign.start}) {
     TextStyle st = TextStyle(
         fontSize: size,
         fontWeight: weight,
         color: Theme.of(context).primaryColor,
         fontFamily: font);
-    Text tx = Text(text, style: st);
+    Text tx = Text(
+      text,
+      style: st,
+      textAlign: align,
+    );
     return Container(
       padding: pad,
       child: tx,
@@ -97,11 +104,11 @@ class Tools {
   }
 
   Future<void> _launchDBURL() async {
-    Uri _url =
+    Uri url =
         Uri.parse('https://www.kaggle.com/datasets/dhruvildave/spotify-charts');
 
-    if (!await launchUrl(_url)) {
-      throw Exception('Could not launch $_url');
+    if (!await launchUrl(url)) {
+      throw Exception('Could not launch $url');
     }
   }
 }
