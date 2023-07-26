@@ -67,12 +67,16 @@ class About {
       padding: const EdgeInsets.all(20),
       children: [
         tool.textWriter(
-            text: 'Meet the ✨PANES✨ team', size: 35, weight: FontWeight.bold),
+            text: 'Meet the ✨PANES✨ team',
+            size: 35,
+            weight: FontWeight.bold,
+            align: TextAlign.center),
         Divider(color: Theme.of(context).primaryColor),
         tool.textWriter(
             text: "Our team is conformed by 3 awesome people 💋",
             size: 25,
-            weight: FontWeight.bold),
+            weight: FontWeight.bold,
+            align: TextAlign.center),
         Column(
           children: [
             memberLoader(
