@@ -19,7 +19,7 @@ class Start {
             weight: FontWeight.bold),
         Divider(color: Theme.of(context).primaryColor),
         Row(
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Flexible(
               child: tool.welcomeParagraph(

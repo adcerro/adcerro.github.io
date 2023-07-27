@@ -39,12 +39,14 @@ class Tools {
       {String text = '',
       double size = 0,
       FontWeight? weight = FontWeight.normal,
-      TextAlign align = TextAlign.start}) {
+      TextAlign align = TextAlign.start,
+      TextDecoration decoration = TextDecoration.none}) {
     TextStyle st = TextStyle(
         fontSize: size,
         fontWeight: weight,
         color: Theme.of(context).primaryColor,
-        fontFamily: font);
+        fontFamily: font,
+        decoration: decoration);
     Text tx = Text(
       text,
       style: st,
@@ -81,12 +83,12 @@ class Tools {
     return Container(
         constraints: BoxConstraints(
             minWidth: MediaQuery.of(context).size.width / 5,
-            maxWidth: MediaQuery.of(context).size.width / 1.45,
+            maxWidth: MediaQuery.of(context).size.width / 1.40,
             minHeight: MediaQuery.of(context).size.height / 3),
         padding: pad,
         child: RichText(
           overflow: TextOverflow.visible,
-          maxLines: 11,
+          maxLines: 8,
           text: TextSpan(
             text: '$title\n',
             style: titleStile,

@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:spoticharts/screens/about.dart';
-import 'tools.dart';
+import 'package:spoticharts/screens/compare.dart';
+import 'package:spoticharts/tools.dart';
 import 'package:spoticharts/screens/start.dart';
 
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown,
-  ]).then((value) => runApp(const MyApp()));
   runApp(const MyApp());
 }
 
@@ -56,6 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
     Tools tool = Tools(context, 'SourceSans');
     Start st = Start(context);
     About ab = About(context);
+    Compare cp = Compare(context);
     tool.setTBpadding(20);
     return Scaffold(
         bottomNavigationBar: tool.bottomBar(buttons: <BottomNavigationBarItem>[
@@ -67,6 +63,8 @@ class _MyHomePageState extends State<MyHomePage> {
           builder: (context, constraints) {
             if (MediaQuery.of(context).size.width <= 700) {
               switch (_selectedIndex) {
+                case 1:
+                  return cp.verticalLayout(tool);
                 case 2:
                   return ab.verticalLayout(tool);
                 default:
@@ -74,6 +72,8 @@ class _MyHomePageState extends State<MyHomePage> {
               }
             } else {
               switch (_selectedIndex) {
+                case 1:
+                  return cp.horizontalLayout(tool);
                 case 2:
                   return ab.horizontalLayout(tool);
                 default:
