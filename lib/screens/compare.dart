@@ -1,5 +1,3 @@
-import 'dart:js_interop';
-
 import 'package:flutter/material.dart';
 import 'package:spoticharts/tools.dart';
 import 'dart:async';
@@ -37,22 +35,22 @@ class Compare {
                     {list = widgetFiller(spotify.me.recentlyPlayed().all())},
                 style: TextButton.styleFrom(
                     foregroundColor: Theme.of(context).primaryColor),
-                child: Text('Query🧾')),
+                child: const Text('Query🧾')),
             TextButton(
                 onPressed: () => {},
                 style: TextButton.styleFrom(
                     foregroundColor: Theme.of(context).primaryColor),
-                child: Text('Current⏲')),
+                child: const Text('Current⏲')),
             TextButton(
                 onPressed: () => {},
                 style: TextButton.styleFrom(
                     foregroundColor: Theme.of(context).primaryColor),
-                child: Text('👩‍🎤Top artists👨‍🎤')),
+                child: const Text('👩‍🎤Top artists👨‍🎤')),
             TextButton(
                 onPressed: () => {},
                 style: TextButton.styleFrom(
                     foregroundColor: Theme.of(context).primaryColor),
-                child: Text('Top songs 🎵🔥'))
+                child: const Text('Top songs 🎵🔥'))
           ]),
         ),
         SliverList(
@@ -63,6 +61,38 @@ class Compare {
   }
 
   Widget verticalLayout(Tools tool) {
-    return CustomScrollView();
+    return CustomScrollView(
+      slivers: [
+        SliverAppBar(
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          floating: true,
+          title: Row(children: [
+            TextButton(
+                onPressed: () async => {},
+                style: TextButton.styleFrom(
+                    foregroundColor: Theme.of(context).primaryColor),
+                child: const Text('Query🧾')),
+            TextButton(
+                onPressed: () => {},
+                style: TextButton.styleFrom(
+                    foregroundColor: Theme.of(context).primaryColor),
+                child: const Text('Current⏲')),
+            TextButton(
+                onPressed: () => {},
+                style: TextButton.styleFrom(
+                    foregroundColor: Theme.of(context).primaryColor),
+                child: const Text('👩‍🎤Top artists👨‍🎤')),
+            TextButton(
+                onPressed: () => {},
+                style: TextButton.styleFrom(
+                    foregroundColor: Theme.of(context).primaryColor),
+                child: const Text('Top songs 🎵🔥'))
+          ]),
+        ),
+        SliverList(
+          delegate: SliverChildListDelegate([]),
+        )
+      ],
+    );
   }
 }
