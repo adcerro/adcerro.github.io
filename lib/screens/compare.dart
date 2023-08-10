@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:spoticharts/tools.dart';
 import 'dart:async';
 import 'package:spotify/spotify.dart';
+import 'package:sql_conn/sql_conn.dart';
 
 class Compare {
   late BuildContext context;
@@ -11,6 +12,15 @@ class Compare {
   List<Widget> widgetFiller(Future<Iterable<PlayHistory>> iterable) {
     List<Widget> list = [];
     return list;
+  }
+
+  void connecting() async {
+    await SqlConn.connect(
+        ip: "fprojectdb.database.windows.net",
+        port: "",
+        databaseName: "projectSpotify",
+        username: "AS",
+        password: "112233");
   }
 
   Widget horizontalLayout(Tools tool) {
@@ -23,6 +33,7 @@ class Compare {
     );
     final spotify =
         SpotifyApi.fromAuthCodeGrant(grant, 'https://localhost:8080');
+
     List<Widget> list = [];
     return CustomScrollView(
       slivers: [
