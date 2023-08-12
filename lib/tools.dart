@@ -1,6 +1,5 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Tools {
@@ -8,7 +7,7 @@ class Tools {
   EdgeInsets pad = const EdgeInsets.fromLTRB(0, 0, 0, 0);
   String text = '';
   late BuildContext context;
-  Tools(this.context, this.font);
+  Tools(this.context);
   IconButton buttonBuilder(IconData icon, action) {
     return IconButton(onPressed: action, icon: Icon(icon));
   }
@@ -33,38 +32,6 @@ class Tools {
       currentIndex: currentIndex,
       onTap: function,
     );
-  }
-
-  Container textWriter(
-      {String text = '',
-      double size = 0,
-      FontWeight? weight = FontWeight.normal,
-      TextAlign align = TextAlign.start,
-      TextDecoration decoration = TextDecoration.none}) {
-    TextStyle st = TextStyle(
-        fontSize: size,
-        fontWeight: weight,
-        color: Theme.of(context).primaryColor,
-        fontFamily: font,
-        decoration: decoration);
-    Text tx = Text(
-      text,
-      style: st,
-      textAlign: align,
-    );
-    return Container(
-      padding: pad,
-      child: tx,
-    );
-  }
-
-  LottieBuilder lottieLoader({required String link}) {
-    return Lottie.network(animate: true, link);
-  }
-
-  LottieBuilder lottieCustomLoader(
-      {required String link, double width = 0, double height = 0}) {
-    return Lottie.network(animate: true, width: width, height: height, link);
   }
 
   Container welcomeParagraph(

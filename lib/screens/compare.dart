@@ -1,30 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:spoticharts/tools.dart';
 import 'dart:async';
 import 'package:spotify/spotify.dart';
 import 'package:sql_conn/sql_conn.dart';
 
-class Compare {
-  late BuildContext context;
+class Compare extends StatefulWidget {
   String accessToken = '';
-  Compare(this.context);
+  Compare({super.key}) {
+    //_connectingDB();
+  }
+  @override
+  State<Compare> createState() => _CompareState();
+}
 
+class _CompareState extends State<Compare> {
   List<Widget> widgetFiller(Future<Iterable<PlayHistory>> iterable) {
     List<Widget> list = [];
     return list;
   }
 
-  void connecting() async {
+  void _connectingDB() async {
     await SqlConn.connect(
         ip: "fprojectdb.database.windows.net",
         port: "",
         databaseName: "projectSpotify",
-        username: "AS",
-        password: "112233");
+        username: "panes",
+        password: "Codersinthehouse");
   }
 
-  Widget horizontalLayout(Tools tool) {
-    final credentials = SpotifyApiCredentials(
+  Widget _horizontalLayout() {
+    /*final credentials = SpotifyApiCredentials(
         '55d23f0684a24570bb4e3cb9b59cacbf', '77429b32ade848e19cce3769cc7e10bd');
     final grant = SpotifyApi.authorizationCodeGrant(credentials);
     final authUri = grant.getAuthorizationUrl(
@@ -32,7 +36,7 @@ class Compare {
       scopes: [], // scopes are optional
     );
     final spotify =
-        SpotifyApi.fromAuthCodeGrant(grant, 'https://localhost:8080');
+        SpotifyApi.fromAuthCodeGrant(grant, 'https://localhost:8080');*/
 
     List<Widget> list = [];
     return CustomScrollView(
@@ -42,8 +46,7 @@ class Compare {
           floating: true,
           title: Row(children: [
             TextButton(
-                onPressed: () async =>
-                    {list = widgetFiller(spotify.me.recentlyPlayed().all())},
+                onPressed: () async => {setState(() {})},
                 style: TextButton.styleFrom(
                     foregroundColor: Theme.of(context).primaryColor),
                 child: const Text('Query🧾')),
@@ -71,7 +74,7 @@ class Compare {
     );
   }
 
-  Widget verticalLayout(Tools tool) {
+  Widget _verticalLayout() {
     return CustomScrollView(
       slivers: [
         SliverAppBar(
@@ -105,5 +108,14 @@ class Compare {
         )
       ],
     );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (MediaQuery.of(context).size.width <= 700) {
+      return _verticalLayout();
+    } else {
+      return _horizontalLayout();
+    }
   }
 }
