@@ -46,8 +46,8 @@ class _StartState extends State<Start> {
           text: TextSpan(
             text: '$title\n',
             style: textTheme.headlineMedium,
-            children: <TextSpan>[
-              TextSpan(text: '$text\n', style: textTheme.displayMedium),
+            children: [
+              TextSpan(text: '$text\n', style: textTheme.bodyMedium),
               TextSpan(
                 text: 'Our DataFrame >',
                 style: textTheme.bodyMedium?.copyWith(
