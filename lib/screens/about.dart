@@ -1,101 +1,103 @@
 import 'package:flutter/material.dart';
-import 'package:spoticharts/tools.dart';
 
-class About {
-  late BuildContext context;
-  About(this.context);
-  Widget horizontalLayout(Tools tool) {
-    return ListView(
-      padding: const EdgeInsets.all(20),
-      children: [
-        tool.textWriter(
-            text: 'Meet the ✨PANES✨ team',
-            size: 35,
-            weight: FontWeight.bold,
-            align: TextAlign.center),
-        Divider(color: Theme.of(context).primaryColor),
-        tool.textWriter(
-            text: "Our team is conformed by 3 awesome people 💋",
-            size: 25,
-            weight: FontWeight.bold,
-            align: TextAlign.center),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            memberLoader(
-                path: 'assets/alan.jpeg',
-                name: 'Alan Florez',
-                description: 'Crazy guy',
-                tool: tool),
-            memberLoader(
-                path: 'assets/katy.png',
-                name: 'Katy Diaz',
-                description: 'Front-End developer',
-                tool: tool),
-            memberLoader(
-                path: 'assets/tabata.png',
-                name: 'Tabata Llach',
-                description: 'Back-End developer',
-                tool: tool),
-          ],
-        )
-      ],
-    );
-  }
+class About extends StatefulWidget {
+  const About({super.key});
+  @override
+  State<About> createState() => _AboutState();
+}
 
-  Column memberLoader(
-      {required String path,
-      required Tools tool,
-      String name = '',
-      String description = ''}) {
+class _AboutState extends State<About> {
+  EdgeInsets padd = const EdgeInsets.all(20);
+  Column _memberLoader(
+      {required String path, String name = '', String description = ''}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Image(image: AssetImage(path), width: 200, height: 200),
-        tool.textWriter(
-            text: name,
-            size: 35,
-            weight: FontWeight.bold,
-            align: TextAlign.center),
-        tool.textWriter(text: description, size: 20, align: TextAlign.center)
+        Padding(
+          padding: padd,
+          child: Text(
+            name,
+            style: Theme.of(context).textTheme.headlineLarge,
+            textAlign: TextAlign.center,
+          ),
+        ),
+        Padding(
+          padding: padd,
+          child: Text(
+            description,
+            style: Theme.of(context).textTheme.bodyMedium,
+            textAlign: TextAlign.center,
+          ),
+        ),
       ],
     );
   }
 
-  Widget verticalLayout(Tools tool) {
-    return ListView(
-      padding: const EdgeInsets.all(20),
+  Column _verticalLayout() {
+    return Column(
       children: [
-        tool.textWriter(
-            text: 'Meet the ✨PANES✨ team',
-            size: 35,
-            weight: FontWeight.bold,
-            align: TextAlign.center),
+        _memberLoader(
+            path: 'assets/alan.jpeg',
+            name: 'Alan Florez',
+            description: 'Crazy guy'),
+        _memberLoader(
+            path: 'assets/katy.png',
+            name: 'Katy Diaz',
+            description: 'Front-End developer'),
+        _memberLoader(
+            path: 'assets/tabata.png',
+            name: 'Tabata Llach',
+            description: 'Back-End developer'),
+      ],
+    );
+  }
+
+  Row _horizontalLayout() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        _memberLoader(
+            path: 'assets/alan.jpeg',
+            name: 'Alan Florez',
+            description: 'Crazy guy'),
+        _memberLoader(
+            path: 'assets/katy.png',
+            name: 'Katy Diaz',
+            description: 'Front-End developer'),
+        _memberLoader(
+            path: 'assets/tabata.png',
+            name: 'Tabata Llach',
+            description: 'Back-End developer'),
+      ],
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      padding: padd,
+      children: [
+        Padding(
+          padding: padd,
+          child: Text(
+            'Meet the ✨PANES✨ team',
+            style: Theme.of(context).textTheme.headlineLarge,
+            textAlign: TextAlign.center,
+          ),
+        ),
         Divider(color: Theme.of(context).primaryColor),
-        tool.textWriter(
-            text: "Our team is conformed by 3 awesome people 💋",
-            size: 25,
-            weight: FontWeight.bold,
-            align: TextAlign.center),
-        Column(
-          children: [
-            memberLoader(
-                path: 'assets/alan.jpeg',
-                name: 'Alan Florez',
-                description: 'Crazy guy',
-                tool: tool),
-            memberLoader(
-                path: 'assets/katy.png',
-                name: 'Katy Diaz',
-                description: 'Front-End developer',
-                tool: tool),
-            memberLoader(
-                path: 'assets/tabata.png',
-                name: 'Tabata Llach',
-                description: 'Back-End developer',
-                tool: tool),
-          ],
-        )
+        Padding(
+          padding: padd,
+          child: Text(
+            "Our team is conformed by 3 awesome people 💋",
+            style: Theme.of(context).textTheme.headlineMedium,
+            textAlign: TextAlign.center,
+          ),
+        ),
+        (MediaQuery.of(context).size.width <= 700)
+            ? _verticalLayout()
+            : _horizontalLayout()
       ],
     );
   }
