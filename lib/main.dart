@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:spoticharts/screens/about.dart';
 import 'package:spoticharts/screens/compare.dart';
-import 'package:spoticharts/tools.dart';
 import 'package:spoticharts/theme/master_theme.dart';
 import 'package:spoticharts/screens/start.dart';
 
@@ -38,17 +37,38 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  IconButton buttonBuilder(IconData icon, action) {
+    return IconButton(onPressed: action, icon: Icon(icon));
+  }
+
+  BottomNavigationBarItem bottonButtonBuilder(IconData icon, String label) {
+    return BottomNavigationBarItem(icon: Icon(icon), label: label);
+  }
+
+  BottomNavigationBar bottomBar(
+      {required List<BottomNavigationBarItem> buttons,
+      int currentIndex = 0,
+      required Function(int) function}) {
+    return BottomNavigationBar(
+      backgroundColor: Theme.of(context).cardColor,
+      items: buttons,
+      selectedItemColor: Theme.of(context).indicatorColor,
+      unselectedItemColor: Theme.of(context).primaryColor,
+      currentIndex: currentIndex,
+      onTap: function,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    Tools tool = Tools(context);
     Start st = const Start();
     About ab = const About();
     Compare cp = Compare();
     return Scaffold(
-        bottomNavigationBar: tool.bottomBar(buttons: <BottomNavigationBarItem>[
-          tool.bottonButtonBuilder(Icons.home_filled, 'Home'),
-          tool.bottonButtonBuilder(Icons.search, 'Compare'),
-          tool.bottonButtonBuilder(Icons.mail, 'About us')
+        bottomNavigationBar: bottomBar(buttons: <BottomNavigationBarItem>[
+          bottonButtonBuilder(Icons.home_filled, 'Home'),
+          bottonButtonBuilder(Icons.search, 'Compare'),
+          bottonButtonBuilder(Icons.mail, 'About us')
         ], currentIndex: _selectedIndex, function: _onItemTapped),
         body: LayoutBuilder(
           builder: (context, constraints) {

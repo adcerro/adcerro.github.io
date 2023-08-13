@@ -5,9 +5,7 @@ import 'package:sql_conn/sql_conn.dart';
 
 class Compare extends StatefulWidget {
   String accessToken = '';
-  Compare({super.key}) {
-    //_connectingDB();
-  }
+  Compare({super.key});
   @override
   State<Compare> createState() => _CompareState();
 }
@@ -28,6 +26,7 @@ class _CompareState extends State<Compare> {
   }
 
   Widget _horizontalLayout() {
+    _connectingDB();
     /*final credentials = SpotifyApiCredentials(
         '55d23f0684a24570bb4e3cb9b59cacbf', '77429b32ade848e19cce3769cc7e10bd');
     final grant = SpotifyApi.authorizationCodeGrant(credentials);
