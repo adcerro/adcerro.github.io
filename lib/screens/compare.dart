@@ -21,8 +21,8 @@ class _CompareState extends State<Compare> {
         ip: "fprojectdb.database.windows.net",
         port: "",
         databaseName: "projectSpotify",
-        username: "panes",
-        password: "Codersinthehouse");
+        username: "coolreader",
+        password: "Anawesomepass.");
   }
 
   Widget _horizontalLayout() {
@@ -45,7 +45,12 @@ class _CompareState extends State<Compare> {
           floating: true,
           title: Row(children: [
             TextButton(
-                onPressed: () async => {setState(() {})},
+                onPressed: () async => {
+                      setState(() {
+                        print(SqlConn.readData('select * from dbo.charts')
+                            .toString());
+                      })
+                    },
                 style: TextButton.styleFrom(
                     foregroundColor: Theme.of(context).primaryColor),
                 child: const Text('Query🧾')),
