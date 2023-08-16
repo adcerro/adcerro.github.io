@@ -1,43 +1,39 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
-import 'package:spotify/spotify.dart';
-import 'package:sql_conn/sql_conn.dart';
+import 'package:sqflite/sqflite.dart';
+import 'package:logger/logger.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 class Compare extends StatefulWidget {
-  String accessToken = '';
   Compare({super.key});
   @override
   State<Compare> createState() => _CompareState();
 }
 
 class _CompareState extends State<Compare> {
-  List<Widget> widgetFiller(Future<Iterable<PlayHistory>> iterable) {
+  var db;
+  var logger = Logger();
+  List<Widget> _widgetFiller(iterable) {
     List<Widget> list = [];
+    try {
+      for (var element in iterable) {
+        list.add(Text(element));
+      }
+    } catch (error) {
+      logger.w('🚨 hey! i did not get something to iterate');
+    }
     return list;
   }
 
   void _connectingDB() async {
-    await SqlConn.connect(
-        ip: "fprojectdb.database.windows.net",
-        port: "",
-        databaseName: "projectSpotify",
-        username: "coolreader",
-        password: "Anawesomepass.");
+    sqfliteFfiInit();
+
+    databaseFactory = databaseFactoryFfi;
+    db = await openDatabase('test.db');
   }
 
   Widget _horizontalLayout() {
     _connectingDB();
-    /*final credentials = SpotifyApiCredentials(
-        '55d23f0684a24570bb4e3cb9b59cacbf', '77429b32ade848e19cce3769cc7e10bd');
-    final grant = SpotifyApi.authorizationCodeGrant(credentials);
-    final authUri = grant.getAuthorizationUrl(
-      Uri.parse('https://localhost:8080'),
-      scopes: [], // scopes are optional
-    );
-    final spotify =
-        SpotifyApi.fromAuthCodeGrant(grant, 'https://localhost:8080');*/
-
-    List<Widget> list = [];
+    var list;
     return CustomScrollView(
       slivers: [
         SliverAppBar(
@@ -45,10 +41,10 @@ class _CompareState extends State<Compare> {
           floating: true,
           title: Row(children: [
             TextButton(
-                onPressed: () async => {
-                      setState(() {
-                        print(SqlConn.readData('select * from dbo.charts')
-                            .toString());
+                onPressed: () => {
+                      setState(() async {
+                        list = _widgetFiller(
+                            db.rawquery('select top 1 from charts'));
                       })
                     },
                 style: TextButton.styleFrom(
@@ -72,7 +68,9 @@ class _CompareState extends State<Compare> {
           ]),
         ),
         SliverList(
-          delegate: SliverChildListDelegate(list),
+          delegate: SliverChildBuilderDelegate((context, index) {
+            return list.get(index);
+          }),
         )
       ],
     );
@@ -108,7 +106,7 @@ class _CompareState extends State<Compare> {
           ]),
         ),
         SliverList(
-          delegate: SliverChildListDelegate([]),
+          delegate: SliverChildBuilderDelegate((context, index) {}),
         )
       ],
     );
