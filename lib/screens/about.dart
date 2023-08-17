@@ -75,7 +75,8 @@ class _AboutState extends State<About> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
+    return Expanded(
+        child: ListView(
       padding: padd,
       children: [
         Padding(
@@ -99,6 +100,6 @@ class _AboutState extends State<About> {
             ? _verticalLayout()
             : _horizontalLayout()
       ],
-    );
+    ));
   }
 }

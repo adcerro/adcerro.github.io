@@ -69,7 +69,7 @@ class _CompareState extends State<Compare> {
         ),
         SliverList(
           delegate: SliverChildBuilderDelegate((context, index) {
-            return list.get(index);
+            return;
           }),
         )
       ],
@@ -77,37 +77,22 @@ class _CompareState extends State<Compare> {
   }
 
   Widget _verticalLayout() {
-    return CustomScrollView(
-      slivers: [
-        SliverAppBar(
-          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-          floating: true,
-          title: Row(children: [
-            TextButton(
-                onPressed: () async => {},
-                style: TextButton.styleFrom(
-                    foregroundColor: Theme.of(context).primaryColor),
-                child: const Text('Query🧾')),
-            TextButton(
-                onPressed: () => {},
-                style: TextButton.styleFrom(
-                    foregroundColor: Theme.of(context).primaryColor),
-                child: const Text('Current⏲')),
-            TextButton(
-                onPressed: () => {},
-                style: TextButton.styleFrom(
-                    foregroundColor: Theme.of(context).primaryColor),
-                child: const Text('👩‍🎤Top artists👨‍🎤')),
-            TextButton(
-                onPressed: () => {},
-                style: TextButton.styleFrom(
-                    foregroundColor: Theme.of(context).primaryColor),
-                child: const Text('Top songs 🎵🔥'))
-          ]),
+    return Row(
+      children: [
+        NavigationRail(
+          destinations: const [
+            NavigationRailDestination(
+                icon: Icon(Icons.list), label: Text('Query')),
+            NavigationRailDestination(
+                icon: Icon(Icons.watch), label: Text('Current')),
+            NavigationRailDestination(
+                icon: Icon(Icons.fireplace), label: Text('Top artists')),
+            NavigationRailDestination(
+                icon: Icon(Icons.music_note), label: Text('Top songs'))
+          ],
+          selectedIndex: 0,
         ),
-        SliverList(
-          delegate: SliverChildBuilderDelegate((context, index) {}),
-        )
+        ListView()
       ],
     );
   }
@@ -117,7 +102,7 @@ class _CompareState extends State<Compare> {
     if (MediaQuery.of(context).size.width <= 700) {
       return _verticalLayout();
     } else {
-      return _horizontalLayout();
+      return Expanded(child: _horizontalLayout());
     }
   }
 }

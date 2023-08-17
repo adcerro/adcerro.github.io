@@ -104,7 +104,8 @@ class _StartState extends State<Start> {
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
-    return ListView(padding: padd, children: [
+    return Expanded(
+        child: ListView(padding: padd, children: [
       _textWriter(
           style: theme.textTheme.headlineMedium,
           text: 'Hi, this is Spoticharts 👋'),
@@ -116,6 +117,6 @@ class _StartState extends State<Start> {
       (MediaQuery.of(context).size.width <= 700)
           ? _verticalLayout()
           : _horizontalLayout()
-    ]);
+    ]));
   }
 }
