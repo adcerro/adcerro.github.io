@@ -95,7 +95,7 @@ class _AboutState extends State<About> {
             textAlign: TextAlign.center,
           ),
         ),
-        (MediaQuery.of(context).size.width <= 790)
+        (MediaQuery.of(context).size.width <= 825)
             ? _verticalLayout()
             : _horizontalLayout()
       ],
