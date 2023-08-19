@@ -75,8 +75,7 @@ class _AboutState extends State<About> {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-        child: ListView(
+    return ListView(
       padding: padd,
       children: [
         Padding(
@@ -96,10 +95,10 @@ class _AboutState extends State<About> {
             textAlign: TextAlign.center,
           ),
         ),
-        (MediaQuery.of(context).size.width <= 700)
+        (MediaQuery.of(context).size.width <= 790)
             ? _verticalLayout()
             : _horizontalLayout()
       ],
-    ));
+    );
   }
 }

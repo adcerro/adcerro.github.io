@@ -111,9 +111,9 @@ class _MyHomePageState extends State<MyHomePage> {
             case 1:
               return Row(children: [rail, cp]);
             case 2:
-              return Row(children: [rail, ab]);
+              return Row(children: [rail, Expanded(child: ab)]);
             default:
-              return Row(children: [rail, st]);
+              return Row(children: [rail, Expanded(child: st)]);
           }
         },
       ));

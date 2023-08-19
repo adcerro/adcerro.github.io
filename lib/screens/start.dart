@@ -42,7 +42,7 @@ class _StartState extends State<Start> {
         padding: padd,
         child: RichText(
           overflow: TextOverflow.visible,
-          maxLines: 8,
+          maxLines: 10,
           text: TextSpan(
             text: '$title\n',
             style: textTheme.headlineMedium,
@@ -94,8 +94,8 @@ class _StartState extends State<Start> {
           text:
               'Spoticharts is a website that is customized according to your musical tastes, allows you to discover related music and offers you the possibility to compare the popularity of songs and playlists over time, giving you a more complete and enriching music experience.'),
       lottieCustomLoader(
-          width: 150,
-          height: 150,
+          width: MediaQuery.of(context).size.width / 5,
+          height: MediaQuery.of(context).size.height / 5,
           link:
               "https://assets2.lottiefiles.com/private_files/lf30_fjln45y5.json")
     ]);
@@ -104,8 +104,7 @@ class _StartState extends State<Start> {
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
-    return Expanded(
-        child: ListView(padding: padd, children: [
+    return ListView(padding: padd, children: [
       _textWriter(
           style: theme.textTheme.headlineMedium,
           text: 'Hi, this is Spoticharts 👋'),
@@ -117,6 +116,6 @@ class _StartState extends State<Start> {
       (MediaQuery.of(context).size.width <= 700)
           ? _verticalLayout()
           : _horizontalLayout()
-    ]));
+    ]);
   }
 }
