@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sqflite/sqflite.dart';
 import 'package:logger/logger.dart';
-import 'package:sqflite_common_ffi/sqflite_ffi.dart';
+import 'package:flutter/foundation.dart';
 
 class Compare extends StatefulWidget {
   Compare({super.key});
@@ -25,10 +24,8 @@ class _CompareState extends State<Compare> {
   }
 
   void _connectingDB() async {
-    sqfliteFfiInit();
-
-    databaseFactory = databaseFactoryFfi;
-    db = await openDatabase('test.db');
+    if (kIsWeb) {
+    } else {}
   }
 
   Widget _horizontalLayout() {
