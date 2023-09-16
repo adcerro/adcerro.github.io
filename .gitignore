@@ -49,3 +49,6 @@ linux/
 macos/
 test/
 windows/
+
+node_modules/
+.env
