@@ -10,7 +10,7 @@ class Start extends StatefulWidget {
 }
 
 class _StartState extends State<Start> {
-  EdgeInsets padd = const EdgeInsets.all(20);
+  EdgeInsets padd = const EdgeInsets.symmetric(horizontal: 10, vertical: 20);
 
   LottieBuilder lottieLoader({required String link}) {
     return Lottie.network(animate: true, link);
@@ -42,7 +42,7 @@ class _StartState extends State<Start> {
         padding: padd,
         child: RichText(
           overflow: TextOverflow.visible,
-          maxLines: 8,
+          maxLines: 10,
           text: TextSpan(
             text: '$title\n',
             style: textTheme.headlineMedium,
@@ -94,8 +94,8 @@ class _StartState extends State<Start> {
           text:
               'Spoticharts is a website that is customized according to your musical tastes, allows you to discover related music and offers you the possibility to compare the popularity of songs and playlists over time, giving you a more complete and enriching music experience.'),
       lottieCustomLoader(
-          width: 150,
-          height: 150,
+          width: MediaQuery.of(context).size.width / 5,
+          height: MediaQuery.of(context).size.height / 5,
           link:
               "https://assets2.lottiefiles.com/private_files/lf30_fjln45y5.json")
     ]);
@@ -113,7 +113,7 @@ class _StartState extends State<Start> {
           text:
               "Let's give a try to our page, we have many options to explore"),
       Divider(color: theme.primaryColor),
-      (MediaQuery.of(context).size.width <= 700)
+      (MediaQuery.sizeOf(context).width <= 700)
           ? _verticalLayout()
           : _horizontalLayout()
     ]);
