@@ -68,7 +68,11 @@ class _MyHomePageState extends State<MyHomePage> {
       destinations: buttons,
       selectedIndex: _selectedIndex,
       onDestinationSelected: function,
+      indicatorColor: Theme.of(context).primaryColor,
       selectedIconTheme: IconThemeData(color: Theme.of(context).indicatorColor),
+      unselectedIconTheme: IconThemeData(color: Theme.of(context).primaryColor),
+      unselectedLabelTextStyle:
+          TextStyle(color: Theme.of(context).primaryColor),
       selectedLabelTextStyle:
           TextStyle(color: Theme.of(context).indicatorColor),
       labelType: NavigationRailLabelType.all,

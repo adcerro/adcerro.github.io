@@ -15,11 +15,16 @@ class _CompareState extends State<Compare> {
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           floating: true,
           title: TabBar(
-              labelColor: Theme.of(context).primaryColor,
-              labelStyle: Theme.of(context).textTheme.bodySmall,
+              overlayColor:
+                  MaterialStateProperty.all(Theme.of(context).cardColor),
+              labelColor: Theme.of(context).highlightColor,
+              unselectedLabelColor: Theme.of(context).primaryColor,
               indicatorColor: Theme.of(context).primaryColor,
+              labelStyle: Theme.of(context).textTheme.bodySmall,
               indicatorPadding: const EdgeInsets.symmetric(horizontal: 10),
+              indicatorSize: TabBarIndicatorSize.tab,
               splashBorderRadius: BorderRadius.circular(10),
+              dividerHeight: 0,
               tabs: const [
                 Tab(
                   text: 'Query🧾',
@@ -35,16 +40,13 @@ class _CompareState extends State<Compare> {
                 )
               ]),
         ),
-        SliverFillRemaining(
+        const SliverFillRemaining(
           child: TabBarView(
             children: [
-              Icon(
-                Icons.directions_car,
-                color: Theme.of(context).primaryColor,
-              ),
-              Icon(Icons.directions_car, color: Theme.of(context).primaryColor),
-              Icon(Icons.directions_car, color: Theme.of(context).primaryColor),
-              Icon(Icons.directions_car, color: Theme.of(context).primaryColor),
+              Center(child: Text('Query')),
+              Center(child: Text('Current')),
+              Center(child: Text('Top artists')),
+              Center(child: Text('Top songs')),
             ],
           ),
         )
