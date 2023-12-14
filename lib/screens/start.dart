@@ -10,7 +10,7 @@ class Start extends StatefulWidget {
 }
 
 class _StartState extends State<Start> {
-  EdgeInsets padd = const EdgeInsets.fromLTRB(10, 20, 10, 20);
+  EdgeInsets padd = const EdgeInsets.symmetric(horizontal: 10, vertical: 20);
 
   LottieBuilder lottieLoader({required String link}) {
     return Lottie.network(animate: true, link);
@@ -113,7 +113,7 @@ class _StartState extends State<Start> {
           text:
               "Let's give a try to our page, we have many options to explore"),
       Divider(color: theme.primaryColor),
-      (MediaQuery.of(context).size.width <= 700)
+      (MediaQuery.sizeOf(context).width <= 700)
           ? _verticalLayout()
           : _horizontalLayout()
     ]);

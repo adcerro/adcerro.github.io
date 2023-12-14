@@ -7,72 +7,56 @@ class Compare extends StatefulWidget {
 }
 
 class _CompareState extends State<Compare> {
-  Widget _horizontalLayout() {
-    var list;
+  Widget _layout() {
     return CustomScrollView(
+      clipBehavior: Clip.antiAlias,
       slivers: [
         SliverAppBar(
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           floating: true,
-          title: Row(children: [
-            TextButton(
-                onPressed: () => {},
-                style: TextButton.styleFrom(
-                    foregroundColor: Theme.of(context).primaryColor),
-                child: const Text('Query🧾')),
-            TextButton(
-                onPressed: () => {},
-                style: TextButton.styleFrom(
-                    foregroundColor: Theme.of(context).primaryColor),
-                child: const Text('Current⏲')),
-            TextButton(
-                onPressed: () => {},
-                style: TextButton.styleFrom(
-                    foregroundColor: Theme.of(context).primaryColor),
-                child: const Text('👩‍🎤Top artists👨‍🎤')),
-            TextButton(
-                onPressed: () => {},
-                style: TextButton.styleFrom(
-                    foregroundColor: Theme.of(context).primaryColor),
-                child: const Text('Top songs 🎵🔥'))
-          ]),
+          title: TabBar(
+              labelColor: Theme.of(context).primaryColor,
+              labelStyle: Theme.of(context).textTheme.bodySmall,
+              indicatorColor: Theme.of(context).primaryColor,
+              indicatorPadding: const EdgeInsets.symmetric(horizontal: 10),
+              splashBorderRadius: BorderRadius.circular(10),
+              tabs: const [
+                Tab(
+                  text: 'Query🧾',
+                ),
+                Tab(
+                  text: 'Current⏲',
+                ),
+                Tab(
+                  text: '👩‍🎤Top artists👨‍🎤',
+                ),
+                Tab(
+                  text: 'Top songs 🎵🔥',
+                )
+              ]),
         ),
-        SliverList(
-          delegate: SliverChildBuilderDelegate((context, index) {
-            return;
-          }),
+        SliverFillRemaining(
+          child: TabBarView(
+            children: [
+              Icon(
+                Icons.directions_car,
+                color: Theme.of(context).primaryColor,
+              ),
+              Icon(Icons.directions_car, color: Theme.of(context).primaryColor),
+              Icon(Icons.directions_car, color: Theme.of(context).primaryColor),
+              Icon(Icons.directions_car, color: Theme.of(context).primaryColor),
+            ],
+          ),
         )
-      ],
-    );
-  }
-
-  Widget _verticalLayout() {
-    return Row(
-      children: [
-        NavigationRail(
-          destinations: const [
-            NavigationRailDestination(
-                icon: Icon(Icons.list), label: Text('Query')),
-            NavigationRailDestination(
-                icon: Icon(Icons.watch), label: Text('Current')),
-            NavigationRailDestination(
-                icon: Icon(Icons.fireplace), label: Text('Top artists')),
-            NavigationRailDestination(
-                icon: Icon(Icons.music_note), label: Text('Top songs'))
-          ],
-          selectedIndex: 0,
-        ),
-        ListView()
       ],
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    if (MediaQuery.of(context).size.width <= 700) {
-      return _verticalLayout();
-    } else {
-      return Expanded(child: _horizontalLayout());
-    }
+    return DefaultTabController(
+      length: 4,
+      child: _layout(),
+    );
   }
 }

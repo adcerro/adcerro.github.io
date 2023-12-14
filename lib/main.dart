@@ -79,8 +79,8 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     Start st = const Start();
     About ab = const About();
-    Compare cp = Compare();
-    if (MediaQuery.of(context).size.width <= 700) {
+    Compare cp = const Compare();
+    if (MediaQuery.sizeOf(context).width <= 700) {
       return Scaffold(
           bottomNavigationBar: bottomBar(buttons: <BottomNavigationBarItem>[
             bottonButtonBuilder(Icons.home_filled, 'Home'),
@@ -109,7 +109,7 @@ class _MyHomePageState extends State<MyHomePage> {
         builder: (context, constraints) {
           switch (_selectedIndex) {
             case 1:
-              return Row(children: [rail, cp]);
+              return Row(children: [rail, Expanded(child: cp)]);
             case 2:
               return Row(children: [rail, Expanded(child: ab)]);
             default:

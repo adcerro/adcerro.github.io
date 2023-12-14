@@ -19,7 +19,9 @@ class Mastertheme {
           headlineLarge:
               textColor.copyWith(fontWeight: FontWeight.bold, fontSize: 35),
           bodyMedium:
-              textColor.copyWith(fontWeight: FontWeight.normal, fontSize: 20)),
+              textColor.copyWith(fontWeight: FontWeight.normal, fontSize: 20),
+          bodySmall:
+              textColor.copyWith(fontWeight: FontWeight.normal, fontSize: 16)),
     );
   }
 }
